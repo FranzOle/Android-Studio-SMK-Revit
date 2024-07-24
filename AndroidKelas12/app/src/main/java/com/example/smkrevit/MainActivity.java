@@ -20,5 +20,11 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        System.out.println("****");
+        TesTulis("Lionel Jevon");
+    }
+
+    public void TesTulis(String nama){
+        System.out.println("Hello World" + nama);
     }
 }
