@@ -1,6 +1,8 @@
 package com.example.counter;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    int count = 0;
+    TextView tvNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +24,23 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        load();
+    }
+    public void load(){
+        tvNumber = findViewById(R.id.tvNumber);
+    }
+    public void btnUp(View view) {
+        count++;
+        tvNumber.setText(count + "");
+    }
+
+    public void btnDown(View view) {
+        count--;
+        tvNumber.setText(count + "");
+    }
+
+    public void btnReset(View view) {
+        count = 0;
+        tvNumber.setText(count + "");
     }
 }
