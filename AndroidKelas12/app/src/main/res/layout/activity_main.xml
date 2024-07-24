@@ -8,7 +8,20 @@
     android:visibility="visible"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btnKurang"
+        android:layout_width="166dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="544dp"
+        android:backgroundTint="#03A9F4"
+        android:text="Kurang"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/tvTulisan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aku Lionel"
@@ -17,5 +30,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnTambah"
+        android:layout_width="166dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="124dp"
+        android:backgroundTint="#E60808"
+        android:text="Tambah"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="511dp"
+        android:layout_height="65dp"
+        android:background="#08800D"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/btnTambah"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033"
+        tools:layout_editor_absoluteX="-41dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMK Revit"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#F8F5F5"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="27dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
