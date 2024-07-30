@@ -2,11 +2,15 @@ package com.example.messagedialogue;
 
 import android.os.Bundle;
 
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,34 +27,37 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("on create");
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        System.out.println("on start");
+    public void showAlert(String pesan){
+        AlertDialog.Builder buatAlert =new AlertDialog.Builder(this);
+        buatAlert.setTitle("Tes");
+        buatAlert.setMessage(pesan);
+        buatAlert.show();
+    }
+    public void showAlertButton(String pesan){
+        AlertDialog.Builder showAlert = new AlertDialog.Builder(this);
+        showAlert.setTitle("PERINGATAN KERAS");
+        showAlert.setMessage(pesan);
+        showAlert.setPositiveButton("Positive", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                showToast("sudah dihapus");
+            }
+        });
+        showAlert.setNegativeButton("Alert", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                showToast("blom dihapus");
+            }
+        });
+        showAlert.show();
+    }
+    public void btnToast(View view) {
+        showToast("Toast");
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        System.out.println("on resume");
+    public void btnAlertDialogButton(View view) {
+        showAlertButton(" aku mau ngehapus");
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        System.out.println("on pause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        System.out.println("on stop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.out.println("on destroy");
-    }
 
 }
