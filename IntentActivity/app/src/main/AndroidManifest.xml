@@ -13,22 +13,23 @@
         android:theme="@style/Theme.IntentActivity"
         tools:targetApi="31">
         <activity
+            android:name=".Tanggal"
+            android:exported="false" />
+        <activity
             android:name=".Pembelian"
             android:exported="false"
             android:label="Pembelian"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Penjualan"
             android:exported="false"
             android:label="Penjualan"
-            android:parentActivityName=".MainActivity"
-            />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Barang"
             android:exported="false"
             android:label="Barang"
-            android:parentActivityName=".MainActivity"
-            />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

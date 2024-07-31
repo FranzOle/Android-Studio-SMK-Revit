@@ -50,4 +50,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Penjualan.class);
         startActivity(intent);
     }
+
+    public void btnTanggal(View view) {
+        Intent intent = new Intent( this, Tanggal.class);
+        startActivity(intent);
+
+    }
 }
