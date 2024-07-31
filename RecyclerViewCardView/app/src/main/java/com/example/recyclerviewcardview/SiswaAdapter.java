@@ -2,9 +2,13 @@ package com.example.recyclerviewcardview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +36,44 @@ public class SiswaAdapter extends RecyclerView.Adapter<SiswaAdapter.ViewHolder> 
         Siswa siswa = siswaList.get(i);
         viewHolder.tvNama.setText(siswa.getNama());
         viewHolder.tvAlamat.setText(siswa.getAlamat());
+
+        /*
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Nama : " + siswa.getNama() + " Alamat : " + siswa.getAlamat(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        */
+
+        viewHolder.tvMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(context, viewHolder.tvMenu);
+                popupMenu.inflate(R.menu.menu_option);
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        int idItem = item.getItemId();
+                        int position = viewHolder.getAdapterPosition();
+
+                        if (idItem == R.id.menu_simpan) {
+                            Toast.makeText(context, "Simpan Data " + siswa.getNama(), Toast.LENGTH_SHORT).show();
+                        } else if (idItem == R.id.menu_hapus) {
+                            siswaList.remove(position);
+                            notifyItemRemoved(position);
+                            Toast.makeText(context, siswa.getNama() + " Sudah dihapus", Toast.LENGTH_SHORT).show();
+                        }
+
+                        return false;
+                    }
+                });
+
+                popupMenu.show();
+            }
+        });
     }
 
     @Override
@@ -40,15 +82,14 @@ public class SiswaAdapter extends RecyclerView.Adapter<SiswaAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNama;
-        TextView tvAlamat;
+        TextView tvNama, tvAlamat, tvMenu;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvNama = itemView.findViewById(R.id.tvNama);
             tvAlamat = itemView.findViewById(R.id.tvAlamat);
+            tvMenu = itemView.findViewById(R.id.tvMenu);
         }
     }
-
 }
