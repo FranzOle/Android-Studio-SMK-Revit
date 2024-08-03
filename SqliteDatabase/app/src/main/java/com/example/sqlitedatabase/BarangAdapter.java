@@ -1,5 +1,6 @@
 package com.example.sqlitedatabase;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -32,10 +33,34 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tvBarang.setText(barangList.get(position).getBarang());
         holder.tvStok.setText(barangList.get(position).getStok());
         holder.tvHarga.setText(barangList.get(position).getHarga());
+
+        holder.tvMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                PopupMenu popupMenu = new PopupMenu(context, holder.tvMenu);
+                popupMenu.inflate(R.menu.menu_item);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int idItem = item.getItemId();
+                        if (idItem == R.id.ubah){
+                            ((MainActivity)context).selectupdate(barangList.get(position).getIdbarang());
+                        }else if (idItem == R.id.hapus){
+                            ((MainActivity)context).deleteData(barangList.get(position).getIdbarang());
+                        }
+                        return false;
+                    }
+                });
+
+
+                popupMenu.show();
+            }
+        });
     }
 
     @Override

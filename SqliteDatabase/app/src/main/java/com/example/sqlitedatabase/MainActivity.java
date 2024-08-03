@@ -1,6 +1,7 @@
 package com.example.sqlitedatabase;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.media.Image;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
 
+
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<Barang> databarang = new ArrayList<Barang>();
     BarangAdapter adapter;
+    String idbarang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +94,15 @@ public class MainActivity extends AppCompatActivity {
 
 
             } else {
-                pesan("Update");
+                String sql = " UPDATE tblbarang\n" +
+                        "SET barang =\'"+barang+"', stok = "+stok+", harga ="+harga+"\n" +
+                        "WHERE idbarang = "+idbarang+";";
+                if(db.runSQL(sql)){
+                    pesan("Data Sudah Diubah");
+                    selectData();
+                }else{
+                    pesan("Data Tidak Bisa Diubah");
+                }
             }
         }
         etBarang.setText("");
@@ -126,4 +138,44 @@ public class MainActivity extends AppCompatActivity {
             pesan("Data Kosong");
         }
     }
-}
+
+    public void deleteData(String id) {
+        String idbarang = id;
+        AlertDialog.Builder al = new AlertDialog.Builder(this);
+        al.setTitle("Konfirmasi");
+        al.setMessage("Apakah Anda Yakin Ingin Menghapus Data?");
+        al.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String sql = "DELETE FROM tblbarang WHERE idbarang = " + idbarang + ";";
+                if (db.runSQL(sql)) {
+                    pesan("Data Sudah Dihapus");
+                    selectData();
+                } else {
+                    pesan("Data Tidak Bisa Dihapus");
+                }
+            }
+        });
+
+        al.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+
+            }
+        });
+                al.show();
+    }
+
+    @SuppressLint("Range")
+    public void selectupdate(String id) {
+        idbarang = id;
+        String sql = "SELECT * FROM tblbarang WHERE idbarang =" + id + ";";
+        Cursor cursor = db.select(sql);
+        cursor.moveToNext();
+        etBarang.setText(cursor.getString(cursor.getColumnIndex("barang")));
+        etStok.setText(cursor.getString(cursor.getColumnIndex("stok")));
+        etHarga.setText(cursor.getString(cursor.getColumnIndex("harga")));
+        tvPilihan.setText("Update");
+    }
+    }
